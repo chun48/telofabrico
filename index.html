@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Vídeo a pantalla completa</title>
+  <title>Vídeo Oscuro</title>
   <style>
     html, body {
       margin: 0;
@@ -19,13 +19,14 @@
       height: 100%;
       object-fit: cover;
       z-index: -1;
+      filter: brightness(50%); /* oscuridad */
     }
   </style>
 </head>
 <body>
   <video autoplay loop muted playsinline>
     <source src="https://chun48.github.io/telofabrico/video.mp4" />
-    Tu navegador no soporta reproducción de vídeo.
   </video>
 </body>
 </html>
+
