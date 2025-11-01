@@ -1,36 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vídeo a pantalla completa</title>
+    <meta charset="UTF-8">
+    <title>Vídeo Test</title>
     <style>
-      /* Elimina márgenes y barras de scroll */
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow: hidden;
-        background: #000;
-      }
-
-      /* El vídeo ocupa toda la pantalla */
-      video {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* rellena la pantalla sin deformarse */
-        z-index: -1; /* por si quieres añadir texto encima más adelante */
-      }
+      html, body { margin:0; padding:0; height:100%; overflow:hidden; }
+      video { position: fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; }
     </style>
   </head>
   <body>
-    <!-- Vídeo en bucle, sin sonido, autoplay, compatible con móviles -->
     <video autoplay loop muted playsinline>
-      <source src="video.mp4" type="video/mp4" />
-      Tu navegador no soporta la reproducción de vídeo.
+      <source src="https://chun48.github.io/telofabrico/video.mp4" />
     </video>
   </body>
 </html>
+
