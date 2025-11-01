@@ -2,15 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>TE LO FABRICO</title>
+  <title>Vídeo Oscuro con Overlay</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       overflow: hidden;
-      background: #000;
     }
+    /* Vídeo a pantalla completa */
     video {
       position: fixed;
       top: 0;
@@ -19,13 +19,27 @@
       height: 100%;
       object-fit: cover;
       z-index: -1;
-      filter: brightness(70%); /* oscurece pero no desaparece */
+    }
+    /* Capa negra semi-transparente para oscurecer el vídeo */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4); /* 0.4 = 40% de opacidad */
+      z-index: 0;
     }
   </style>
 </head>
 <body>
+  <!-- Vídeo -->
   <video autoplay loop muted playsinline>
     <source src="https://chun48.github.io/telofabrico/video.mp4" />
+    Tu navegador no soporta reproducción de vídeo.
   </video>
+
+  <!-- Overlay para oscurecer -->
+  <div class="overlay"></div>
 </body>
 </html>
