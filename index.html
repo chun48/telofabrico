@@ -1,53 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Vídeo con imagen en esquina</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TeloFabrico - Vídeo con logo</title>
   <style>
+    /* reset y full screen */
     html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
-      height: 100%;
       overflow: hidden;
       background: #000;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Vídeo a pantalla completa */
-    video {
+    /* contenedor base (stacking context) */
+    .site {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* vídeo a pantalla completa (detrás de todo) */
+    .bg-video {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;               /* top:0; right:0; bottom:0; left:0; */
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: -1;
-      filter: brightness(70%);
+      z-index: 0;             /* fondo */
+      /* Si quieres usar filter directamente, ponlo aquí; ejemplo: */
+      /* filter: brightness(70%);  */
     }
 
-    /* Imagen en esquina inferior derecha */
+    /* overlay semitransparente que oscurece el vídeo visualmente */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35); /* ajusta opacidad 0.2 - 0.6 */
+      z-index: 1;             /* encima del vídeo */
+      pointer-events: none;   /* permite click-through si lo necesitas */
+    }
+
+    /* contenedor para contenido en primer plano (logo, texto, botones...) */
+    .ui {
+      position: relative;
+      z-index: 2;             /* por encima del overlay */
+      width: 100%;
+      height: 100%;
+      pointer-events: none;   /* por defecto no interfiere con clicks */
+    }
+
+    /* imagen/logo en esquina inferior derecha */
     .logo {
       position: fixed;
-      bottom: 20px;   /* distancia desde el borde inferior */
-      right: 20px;    /* distancia desde el borde derecho */
-      width: 120px;   /* puedes ajustar el tamaño a tu gusto */
-      height: auto;   /* mantiene proporción */
-      opacity: 0.9;   /* ligera transparencia opcional */
-      transition: all 0.3s ease; /* animación suave si cambias tamaño */
+      bottom: 20px;           /* separación desde abajo */
+      right: 20px;            /* separación desde la derecha */
+      width: 12vw;            /* tamaño responsivo: cambia a tu gusto */
+      max-width: 140px;       /* tamaño máximo */
+      min-width: 48px;        /* tamaño mínimo para móviles */
+      height: auto;
+      z-index: 3;             /* por encima de todo (incluso overlay) */
+      pointer-events: auto;   /* si quieres que el logo sea clicable */
+      transition: transform 0.18s ease, opacity 0.2s ease;
     }
 
     .logo:hover {
-      opacity: 1;     /* más visible al pasar el ratón */
-      transform: scale(1.05); /* efecto ligero al pasar el ratón */
+      transform: scale(1.05);
+      opacity: 0.98;
+    }
+
+    /* ejemplo: texto centrado (opcional) */
+    .center-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      pointer-events: none;
+      color: #fff;
+      font-family: sans-serif;
+      font-size: 2rem;
+      text-shadow: 0 4px 18px rgba(0,0,0,0.6);
+    }
+
+    /* ajustes responsivos: reduce logo en pantallas pequeñas */
+    @media (max-width: 600px) {
+      .logo { width: 20vw; max-width: 90px; }
+      .center-text { font-size: 1.2rem; padding: 0 12px; text-align:center; }
     }
   </style>
 </head>
 <body>
-  <video autoplay loop muted playsinline preload="auto">
-    <source src="https://chun48.github.io/telofabrico/video.mp4" />
-  </video>
+  <div class="site">
+    <!-- Vídeo de fondo -->
+    <video class="bg-video" autoplay loop muted playsinline preload="auto">
+      <source src="https://chun48.github.io/telofabrico/video.mp4" />
+      Tu navegador no soporta reproducción de vídeo.
+    </video>
 
-  <!-- Imagen PNG en la esquina -->
-  <img class="logo" src="imagen.png" alt="Logo" />
+    <!-- Overlay para oscurecer sin tocar el vídeo (más seguro y rápido) -->
+    <div class="overlay"></div>
+
+    <!-- Contenido en primer plano -->
+    <div class="ui">
+      <!-- Texto de ejemplo centrado (opcional) -->
+      <!-- <div class="center-text">TeloFabrico</div> -->
+
+      <!-- Imagen PNG en esquina inferior derecha (ajusta src y tamaño) -->
+      <img class="logo" src="https://chun48.github.io/telofabrico/logo.png" alt="Logo" />
+    </div>
+  </div>
 </body>
 </html>
-
